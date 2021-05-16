@@ -1,0 +1,183 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "users Documentation",
+        "description": "This is an API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/users/": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Create user",
+                "description": "Creates an user",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "userTest",
+                                    "email": "user@Test.cpm"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "created"
+                    },
+                    "400": {
+                        "description": "error"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "List users",
+                "description": "List all users",
+                "parameters": {
+                    "name": "user_id",
+                    "in": "header",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    },
+                    "response": {
+                        "200": {
+                            "description": "success",
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "array",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "400": {
+                                "description": "error"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{user_id}": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "show profile",
+                "description": "show profile user",
+                "parameters": {
+                    "name": "user_id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "example": {
+                            "user_id": "teste"
+                        }
+                    }
+                },
+                "response": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "error"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{user_id}/{admin}": {
+            "patch": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "update profile admin",
+                "description": "change admin",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": {
+                                "user_id": "teste"
+                            }
+                        }
+                    },
+                    {
+                        "name": "admin",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "boolean",
+                            "example": {
+                                "admin": "false"
+                            }
+                        }
+                    }
+                ],
+                "response": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "admin": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "404": {
+                            "description": "error"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
